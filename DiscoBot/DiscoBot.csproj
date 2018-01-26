@@ -10,6 +10,11 @@
     <Compile Remove="Modules\AudioService.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="token.txt" />
+    <None Remove="weatherkey.txt" />
+  </ItemGroup>
+
 
 
   <ItemGroup>
@@ -34,6 +39,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="libsodium.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="opus.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="youtube-dl.exe">

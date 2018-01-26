@@ -24,7 +24,7 @@ namespace DiscoBot
                 .AddSingleton(_commands)
                 .BuildServiceProvider();
 
-            string botToken = "Mzk4NDA3NDY2MzI2Njg3NzQ0.DS-PuQ.6h4ZD83LPOi5iZ8gfvvYJ8Xbxso";
+            string botToken = System.IO.File.ReadAllText(@"token.txt");
 
             //event subscriptions
             _client.Log += Log;
