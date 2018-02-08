@@ -1,5 +1,6 @@
 ﻿using Discord;
 using Discord.Commands;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -36,24 +37,15 @@ namespace DiscoBot.Modules
                     using (HttpContent content = response.Content)
                     {
                         string weatherinfo = await content.ReadAsStringAsync();
-                        Console.WriteLine(weatherinfo);
-                        string[] split_content = weatherinfo.Split(",");
-                        
-                        //description
-                        string[] description = split_content[4].Split(":");
-                        cleaninglist.Add(description[1]);
-                        //temperature
-                        string[] temp = split_content[7].Split(":");
-                        cleaninglist.Add(temp[2]);
-                        //windspeed
-                        string[] windspeed = split_content[13].Split(":");
-                        cleaninglist.Add(windspeed[2]);
-                        //winddirection
-                        string[] winddirection = split_content[14].Split(":");
-                        cleaninglist.Add(winddirection[1].Trim('}'));
-                        
-
-
+                        var weatherjson = JsonConvert.DeserializeObject<dynamic>(weatherinfo);
+                        string desc = weatherjson["weather"][0]["description"];
+                        cleaninglist.Add(desc);
+                        string temp = weatherjson["main"]["temp"];
+                        cleaninglist.Add(temp);
+                        string speed = weatherjson["wind"]["speed"];
+                        cleaninglist.Add(speed);
+                        string deg = weatherjson["wind"]["deg"];
+                        cleaninglist.Add(deg);                                      
                     }
 
                 }
